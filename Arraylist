@@ -1,0 +1,66 @@
+package ToDo;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.Select;
+
+public class Array_arraylist {
+	public static void main(String[] args) throws InterruptedException {
+		/*ChromeOptions co = new ChromeOptions();
+		co.addArguments("--remote-allow-origins=*");*/
+		
+		WebDriver driver = new ChromeDriver();		
+		System.setProperty("webdriver.chrome.driver", "F:\\selenium\\chrome driver\\chromedriver.exe");
+		driver.get("https://rahulshettyacademy.com/seleniumPractise/");
+		//driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		Thread.sleep(3000);
+		int j=0;
+		String wanted[] = {"brocolli","cauliflower","cucumber","raspberry"};
+		List<WebElement> vegtables =driver.findElements(By.cssSelector("h4.product-name"));
+		for(int i=0;i<vegtables.size();i++)
+		{
+			
+			String []ExVegtables = vegtables.get(i).getText().split("-");
+			String  AcVeg = ExVegtables[0].trim().toLowerCase();
+			
+			List<String> wantedlist = Arrays.asList(wanted);
+			if(wantedlist.contains(AcVeg))
+			{
+				j++;
+				driver.findElements(By.xpath("//div[@class='product-action']/button")).get(i).click();
+				if(j==wanted.length)
+				{
+					break;
+				}
+			}
+		}
+		
+		driver.findElement(By.cssSelector("img[alt='Cart']")).click();
+		driver.findElement(By.xpath("//button[contains (text(),'PROCEED TO CHECKOUT')]")).click();
+		driver.findElement(By.cssSelector("input.promoCode")).sendKeys("rahulshettyacademy");
+		driver.findElement(By.cssSelector("button.promoBtn")).click();
+		driver.findElement(By.xpath("//button[contains(text(), 'Place Order')]")).click();
+		
+		WebElement country = driver.findElement(By.xpath("//select[@style='width: 200px;']"));
+		Select cun = new Select(country);
+		cun.selectByVisibleText("India");
+		
+		driver.findElement(By.cssSelector("input.chkAgree")).click();
+		driver.findElement(By.xpath("//button[contains(text(),'Proceed')]")).click();
+		
+		
+		 
+		
+	}
+
+}
+
+ 

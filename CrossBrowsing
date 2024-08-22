@@ -1,0 +1,27 @@
+package ToDo;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class CrossBrowsing {
+	public static void main(String[] args) {
+		
+	
+
+	WebDriver driver = new ChromeDriver();
+	System.setProperty("webdriver.chrome.driver", "F:\\selenium\\chrome driver\\chromedriver.exe");
+	driver.get("https://www.google.com/");
+		
+		WebDriver driver = new FirefoxDriver();
+		System.setProperty("webdriver.firefox.driver", "F:\\selenium\\firefox driver\\geckodriver-v0.32.2-win32\\geckodriver.exe");
+		driver.get("https://www.google.com/"); 
+		
+		
+		WebDriver driver = new EdgeDriver();
+		System.setProperty("webdriver.edge.driver", "F:\\selenium\\MicrosoftEdge\\msedgedriver.exe");
+		driver.get("https://www.google.com/");
+		
+}
+}

@@ -1,0 +1,34 @@
+package ToDo;
+
+import java.time.Duration;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class windowHandle {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		WebDriver driver = new ChromeDriver();
+		System.setProperty("webdriver.chrome.driver", "F:\\selenium\\chrome driver\\chromedriver.exe");
+		driver.get("https://rahulshettyacademy.com/locatorspractice/");
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		
+		driver.findElement(By.id("visitUsTwo")).click();
+		Set<String> window=driver.getWindowHandles();
+		Iterator<String> control = window.iterator();
+		String parent = control.next();
+		String child = control.next();
+		driver.switchTo().window(child);
+		System.out.println(driver.findElement(By.cssSelector(".top-left")).getText());
+		
+
+	}
+
+}
